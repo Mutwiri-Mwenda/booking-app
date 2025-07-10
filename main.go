@@ -31,6 +31,7 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 			// Process the booking
 			bookTickets(userTickets, firstName, lastName, email)
+			sendTicket(userTickets, firstName, lastName, email)
 			
 			// Display current bookings - FIXED: Extract first names properly
 			firstNames := getFirstNamesFromBookings()
@@ -160,4 +161,11 @@ func displayBookingSummary() {
 			booking["firstName"], booking["lastName"], booking["numberOfTickets"])
 	}
 	fmt.Println()
+}
+
+func sendTicket(userTickets uint, firstName string, lastName string, email string){
+	var ticket = fmt.Sprintf("%v tickets for %v %v ", userTickets, firstName, lastName)
+	fmt.Printf("#########################\n")
+	fmt.Printf("Sending %v tickets to email address %v \n", ticket, email)
+	fmt.Printf("#########################\n")
 }

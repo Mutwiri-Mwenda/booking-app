@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // Global configuration
@@ -31,7 +32,7 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 			// Process the booking
 			bookTickets(userTickets, firstName, lastName, email)
-			sendTicket(userTickets, firstName, lastName, email)
+			go sendTicket(userTickets, firstName, lastName, email)
 			
 			// Display current bookings - FIXED: Extract first names properly
 			firstNames := getFirstNamesFromBookings()
@@ -164,7 +165,8 @@ func displayBookingSummary() {
 }
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string){
-	var ticket = fmt.Sprintf("%v tickets for %v %v ", userTickets, firstName, lastName)
+	time.Sleep(50 * time.Second)
+	var ticket = fmt.Sprintf("%v tickets for %v %v \n", userTickets, firstName, lastName)
 	fmt.Printf("#########################\n")
 	fmt.Printf("Sending %v tickets to email address %v \n", ticket, email)
 	fmt.Printf("#########################\n")
